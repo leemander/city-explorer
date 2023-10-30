@@ -1,9 +1,11 @@
 export default function ({ message, setErrorMessage }) {
   return (
-    <dialog open>
-      <h2>Error</h2>
-      <p>{message}</p>
-      <button onClick={() => setErrorMessage("")}>Dismiss</button>
-    </dialog>
+    <div className="error-backdrop">
+      <dialog>
+        <h2>Error</h2>
+        <p>{message}</p>
+        <button onClick={() => setErrorMessage("")}>Dismiss</button>
+      </dialog>
+    </div>
   );
 }
