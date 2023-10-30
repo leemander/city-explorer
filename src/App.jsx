@@ -2,24 +2,29 @@ import { useState } from "react";
 import "./App.css";
 
 import axios from "axios";
+import Error from "./components/Error";
 
 function App() {
   const [location, setLocation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [mapURL, setMapURL] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   async function getLocation(e) {
     e.preventDefault();
-    const res = await axios.get(
-      `https://eu1.locationiq.com/v1/search?key=${API_KEY}&q=${searchTerm}&format=json`
-    );
-
-    setLocation(res.data[0]);
-    setMapURL(
-      `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${`${res.data[0].lat},${res.data[0].lon}`}&zoom=12`
-    );
+    try {
+      const res = await axios.get(
+        `https://eu1.locationiq.com/v1/search?key=${API_KEY}&q=${searchTerm}&format=json`
+      );
+      setLocation(res.data[0]);
+      setMapURL(
+        `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${`${res.data[0].lat},${res.data[0].lon}`}&zoom=12`
+      );
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   }
 
   return (
@@ -40,7 +45,7 @@ function App() {
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
                 }}
-                required
+                // required
                 type="text"
               />
             </label>
@@ -63,6 +68,9 @@ function App() {
           )}
         </div>
       </main>
+      {errorMessage && (
+        <Error message={errorMessage} setErrorMessage={setErrorMessage} />
+      )}
     </>
   );
 }

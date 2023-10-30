@@ -113,7 +113,7 @@ form {
 form > label {
   align-items: center;
   display: flex;
-  gap: 0.25em;
+  gap: 0.5em;
 }
 
 input {
@@ -172,4 +172,31 @@ article ul {
   list-style: none;
   font-size: 1.25rem;
   padding-left: 0;
+}
+
+dialog {
+  background-color: #fff;
+  display: grid;
+  gap: 1em;
+  left: 50%;
+  margin: 0;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+dialog::backdrop {
+  background-color: black;
+}
+
+dialog > * {
+  margin: 0;
+}
+
+dialog h2 {
+  color: tomato;
+}
+
+dialog button {
+  padding: 0.5em;
 }
