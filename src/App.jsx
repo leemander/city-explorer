@@ -14,7 +14,7 @@ function App() {
     const res = await axios.get(
       `https://eu1.locationiq.com/v1/search?key=${API_KEY}&q=${searchTerm}&format=json`
     );
-    console.log(res);
+    setLocation(res.data[0]);
   }
 
   return (
@@ -24,11 +24,13 @@ function App() {
           <label htmlFor="location">
             City:
             <input
-              type="text"
+              autoComplete="off"
               id="location"
               onChange={(e) => {
                 setSearchTerm(e.target.value);
               }}
+              required
+              type="text"
             />
           </label>
           <button>Explore!</button>
