@@ -24,32 +24,44 @@ function App() {
 
   return (
     <>
+      <header>
+        <div className="container">
+          <h1>City Explorer</h1>
+        </div>
+      </header>
       <main>
-        <form onSubmit={(e) => getLocation(e)}>
-          <label htmlFor="location">
-            City:
-            <input
-              autoComplete="off"
-              id="location"
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-              }}
-              required
-              type="text"
-            />
-          </label>
-          <button>Explore!</button>
-        </form>
-        {location && (
-          <article>
-            <h2>{location.display_name}</h2>
-            <img src={mapURL} alt={`Map of ${location.display_name}`} />
-            <ul>
-              <li>Latitude: {location.lat}</li>
-              <li>Longitude: {location.lon}</li>
-            </ul>
-          </article>
-        )}
+        <div className="container">
+          <form onSubmit={(e) => getLocation(e)}>
+            <label htmlFor="location">
+              City:
+              <input
+                autoComplete="off"
+                id="location"
+                onChange={(e) => {
+                  setSearchTerm(e.target.value);
+                }}
+                required
+                type="text"
+              />
+            </label>
+            <button>Explore!</button>
+          </form>
+          {location && (
+            <article>
+              <div>
+                <h2>{location.display_name}</h2>
+                <img src={mapURL} alt={`Map of ${location.display_name}`} />
+              </div>
+              <div>
+                <h3>Information</h3>
+                <ul>
+                  <li>Latitude: {location.lat}</li>
+                  <li>Longitude: {location.lon}</li>
+                </ul>
+              </div>
+            </article>
+          )}
+        </div>
       </main>
     </>
   );
