@@ -6,6 +6,7 @@ import axios from "axios";
 function App() {
   const [location, setLocation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [mapURL, setMapURL] = useState("");
 
   const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -14,7 +15,11 @@ function App() {
     const res = await axios.get(
       `https://eu1.locationiq.com/v1/search?key=${API_KEY}&q=${searchTerm}&format=json`
     );
+
     setLocation(res.data[0]);
+    setMapURL(
+      `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${`${res.data[0].lat},${res.data[0].lon}`}&zoom=12`
+    );
   }
 
   return (
@@ -38,6 +43,7 @@ function App() {
         {location && (
           <article>
             <h2>{location.display_name}</h2>
+            <img src={mapURL} alt={`Map of ${location.display_name}`} />
             <ul>
               <li>Latitude: {location.lat}</li>
               <li>Longitude: {location.lon}</li>
