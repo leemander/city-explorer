@@ -140,6 +140,7 @@ form > button {
 }
 
 form > button:is(:hover, :focus-visible) {
+  outline: 0;
   scale: 0.95;
 }
 
