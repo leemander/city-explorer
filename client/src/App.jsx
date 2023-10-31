@@ -19,9 +19,6 @@ function App() {
         `https://eu1.locationiq.com/v1/search?key=${API_KEY}&q=${searchTerm}&format=json`
       );
       setLocation(res.data[0]);
-      setMapURL(
-        `https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${`${res.data[0].lat},${res.data[0].lon}`}&zoom=12`
-      );
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -55,7 +52,10 @@ function App() {
             <article>
               <div>
                 <h2>{location.display_name}</h2>
-                <img src={mapURL} alt={`Map of ${location.display_name}`} />
+                <img
+                  src={`https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${`${location.lat},${location.lon}`}&zoom=12`}
+                  alt={`Map of ${location.display_name}`}
+                />
               </div>
               <div>
                 <h3>Information</h3>
