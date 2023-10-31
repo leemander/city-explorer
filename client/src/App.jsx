@@ -3,11 +3,12 @@ import "./App.css";
 
 import axios from "axios";
 import Error from "./components/Error";
+import Weather from "./components/Weather";
 
 function App() {
   const [location, setLocation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [mapURL, setMapURL] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -19,9 +20,24 @@ function App() {
         `https://eu1.locationiq.com/v1/search?key=${API_KEY}&q=${searchTerm}&format=json`
       );
       setLocation(res.data[0]);
+      getWeather(res.data[0]);
     } catch (error) {
       setErrorMessage(error.message);
     }
+  }
+
+  async function getWeather(location) {
+    const res = await axios.get(
+      `http://localhost:8080/weather?lat=${location.lat}&lon=${location.lon}&searhTerm=${searchTerm}`
+    );
+    const weatherArray = [];
+    res.data.data.forEach((item) => {
+      weatherArray.push({
+        date: item.datetime,
+        description: item.weather.description,
+      });
+    });
+    setWeatherData(weatherArray);
   }
 
   return (
@@ -63,6 +79,8 @@ function App() {
                   <li>Latitude: {location.lat}</li>
                   <li>Longitude: {location.lon}</li>
                 </ul>
+
+                {weatherData && <Weather weatherData={weatherData} />}
               </div>
             </article>
           )}

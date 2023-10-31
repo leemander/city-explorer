@@ -11,7 +11,7 @@ const weatherData = require("./data/weather.json");
 function filterWeather(lat, lon, searchQuery) {
   return weatherData.find((item) => {
     return (
-      item.lat === lat && item.lon === lon && item.city_name === searchQuery
+      item.lat === lat || item.lon === lon || item.city_name === searchQuery
     );
   });
 }
