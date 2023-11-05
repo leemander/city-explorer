@@ -70,6 +70,7 @@ function App() {
                   setSearchTerm(e.target.value);
                 }}
                 type="text"
+                value={searchTerm}
               />
             </label>
             <button>Explore!</button>
