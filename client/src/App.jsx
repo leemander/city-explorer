@@ -31,19 +31,17 @@ function App() {
 
   async function getWeather() {
     const res = await axios.get(
-      `http://localhost:8080/weather?searchTerm=${searchTerm}`
+      `https://city-explorer-backend-k7kw.onrender.com/weather?searchTerm=${searchTerm}`
     );
     setWeatherData(res.data);
   }
 
   async function getMovies() {
     const res = await axios.get(
-      `http://localhost:8080/movies?searchTerm=${searchTerm}`
+      `https://city-explorer-backend-k7kw.onrender.com/movies?searchTerm=${searchTerm}`
     );
     setMovieData(res.data);
   }
-
-  console.log(movieData);
   return (
     <>
       <header>
