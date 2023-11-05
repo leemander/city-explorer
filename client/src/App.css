@@ -184,19 +184,24 @@ form > button:is(:hover, :focus-visible) {
   scale: 0.95;
 }
 
-.result ul {
+.weather {
   display: flex;
   gap: 1em;
+  flex-wrap: wrap;
   list-style: none;
   font-size: 1.25rem;
   padding-left: 0;
+}
+
+.weather__date {
+  text-decoration: underline;
 }
 
 .movies__wrapper {
   align-items: start;
   display: flex;
   gap: 2em;
-  margin-top: 2em;
+  margin-block: 2em;
   max-width: 100%;
   overflow-x: auto;
 }

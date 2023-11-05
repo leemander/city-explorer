@@ -32,14 +32,16 @@ function App() {
 
   async function getWeather() {
     const res = await axios.get(
-      `https://city-explorer-backend-k7kw.onrender.com/weather?searchTerm=${searchTerm}`
+      `http://localhost:8080/weather?searchTerm=${searchTerm}`
+      // `https://city-explorer-backend-k7kw.onrender.com/weather?searchTerm=${searchTerm}`
     );
     setWeatherData(res.data);
   }
 
   async function getMovies() {
     const res = await axios.get(
-      `https://city-explorer-backend-k7kw.onrender.com/movies?searchTerm=${searchTerm}`
+      `http://localhost:8080/movies?searchTerm=${searchTerm}`
+      // `https://city-explorer-backend-k7kw.onrender.com/movies?searchTerm=${searchTerm}`
     );
     setMovieData(res.data);
   }
@@ -79,6 +81,9 @@ function App() {
             <section className="result">
               <div>
                 <h2>{location.display_name}</h2>
+                <p>
+                  {location.lat}, {location.lon}
+                </p>
                 <img
                   src={`https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${`${location.lat},${location.lon}`}&zoom=${zoomLevel}`}
                   alt={`Map of ${location.display_name}`}
@@ -92,15 +97,7 @@ function App() {
                   </button>
                 </div>
               </div>
-              <div>
-                <h3>Information</h3>
-                <ul>
-                  <li>Latitude: {location.lat}</li>
-                  <li>Longitude: {location.lon}</li>
-                </ul>
-
-                {weatherData && <Weather weatherData={weatherData} />}
-              </div>
+              <div>{weatherData && <Weather weatherData={weatherData} />}</div>
             </section>
           )}
           {movieData && <Movies movieData={movieData} />}
