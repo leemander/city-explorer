@@ -9,6 +9,7 @@ import Movies from "./components/Movies";
 function App() {
   const [location, setLocation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [zoomLevel, setZoomLevel] = useState(12);
   const [weatherData, setWeatherData] = useState(null);
   const [movieData, setMovieData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -42,6 +43,14 @@ function App() {
     );
     setMovieData(res.data);
   }
+
+  function handleZoomChange(modifier) {
+    if (modifier > 0) {
+      zoomLevel < 17 ? setZoomLevel(zoomLevel + modifier) : setZoomLevel(17);
+    } else if (modifier < 0) {
+      zoomLevel > 1 ? setZoomLevel(zoomLevel + modifier) : setZoomLevel(1);
+    }
+  }
   return (
     <>
       <header>
@@ -60,7 +69,6 @@ function App() {
                 onChange={(e) => {
                   setSearchTerm(e.target.value);
                 }}
-                // required
                 type="text"
               />
             </label>
@@ -71,9 +79,17 @@ function App() {
               <div>
                 <h2>{location.display_name}</h2>
                 <img
-                  src={`https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${`${location.lat},${location.lon}`}&zoom=12`}
+                  src={`https://maps.locationiq.com/v3/staticmap?key=${API_KEY}&center=${`${location.lat},${location.lon}`}&zoom=${zoomLevel}`}
                   alt={`Map of ${location.display_name}`}
                 />
+                <div className="result__zoom-controls">
+                  <button onClick={(e) => handleZoomChange(1, e)}>
+                    Zoom In
+                  </button>
+                  <button onClick={(e) => handleZoomChange(-1, e)}>
+                    Zoom Out
+                  </button>
+                </div>
               </div>
               <div>
                 <h3>Information</h3>

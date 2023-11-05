@@ -152,7 +152,6 @@ form > button:is(:hover, :focus-visible) {
 .result h2 {
   max-width: 30ch;
   line-height: 1.2;
-  font-size: 2rem;
 }
 
 .result img {
@@ -163,8 +162,11 @@ form > button:is(:hover, :focus-visible) {
   width: 500px;
 }
 
-.result h3 {
-  font-size: 1.5rem;
+.result__zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  width: 100%;
 }
 
 .result ul {

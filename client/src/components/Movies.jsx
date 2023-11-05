@@ -1,7 +1,6 @@
 import Movie from "./Movie";
 
 export default function Movies({ movieData }) {
-  console.log(movieData);
   return (
     <section className="movies">
       <h3>Movies</h3>
@@ -9,6 +8,7 @@ export default function Movies({ movieData }) {
         {movieData.map((movie) => {
           return (
             <Movie
+              key={Math.floor(Math.random() * 1000)}
               image_url={movie.image_url}
               title={movie.title}
               overview={movie.overview}

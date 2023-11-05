@@ -37,7 +37,7 @@ app.get("/movies", async (req, res) => {
       };
     })
     .sort((a, b) => b.popularity - a.popularity)
-    .splice(0, 10);
+    .splice(0, 5);
   res.json(wrangledData);
 });
 
