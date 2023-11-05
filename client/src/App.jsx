@@ -4,11 +4,13 @@ import "./App.css";
 import axios from "axios";
 import Error from "./components/Error";
 import Weather from "./components/Weather";
+import Movies from "./components/Movies";
 
 function App() {
   const [location, setLocation] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [weatherData, setWeatherData] = useState(null);
+  const [movieData, setMovieData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -20,7 +22,8 @@ function App() {
         `https://eu1.locationiq.com/v1/search?key=${API_KEY}&q=${searchTerm}&format=json`
       );
       setLocation(res.data[0]);
-      getWeather(res.data[0]);
+      getWeather();
+      getMovies();
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -33,6 +36,14 @@ function App() {
     setWeatherData(res.data);
   }
 
+  async function getMovies() {
+    const res = await axios.get(
+      `http://localhost:8080/movies?searchTerm=${searchTerm}`
+    );
+    setMovieData(res.data);
+  }
+
+  console.log(movieData);
   return (
     <>
       <header>
@@ -58,7 +69,7 @@ function App() {
             <button>Explore!</button>
           </form>
           {location && (
-            <article>
+            <section className="result">
               <div>
                 <h2>{location.display_name}</h2>
                 <img
@@ -75,8 +86,9 @@ function App() {
 
                 {weatherData && <Weather weatherData={weatherData} />}
               </div>
-            </article>
+            </section>
           )}
+          {movieData && <Movies movieData={movieData} />}
         </div>
       </main>
       {errorMessage && (

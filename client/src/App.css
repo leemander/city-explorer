@@ -144,18 +144,18 @@ form > button:is(:hover, :focus-visible) {
   scale: 0.95;
 }
 
-article {
+.result {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-article h2 {
+.result h2 {
   max-width: 30ch;
   line-height: 1.2;
   font-size: 2rem;
 }
 
-article img {
+.result img {
   aspect-ratio: 1;
   border: 5px solid #99d98c;
   border-radius: 0.5em;
@@ -163,16 +163,36 @@ article img {
   width: 500px;
 }
 
-article h3 {
+.result h3 {
   font-size: 1.5rem;
 }
 
-article ul {
+.result ul {
   display: flex;
   gap: 1em;
   list-style: none;
   font-size: 1.25rem;
   padding-left: 0;
+}
+
+.movies__wrapper {
+  align-items: start;
+  display: flex;
+  gap: 2em;
+  margin-top: 2em;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.movies__movie {
+  min-width: 25em;
+  width: 100%;
+}
+
+.movie__poster {
+  display: block;
+  margin: 0 auto;
+  max-height: 15em;
 }
 
 .error-backdrop {
