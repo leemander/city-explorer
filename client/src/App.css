@@ -169,6 +169,21 @@ form > button:is(:hover, :focus-visible) {
   width: 100%;
 }
 
+.result__zoom-controls > button {
+  background-color: #99d98c;
+  border: 0;
+  border-radius: 0.5em;
+  color: #184e77;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.5em;
+}
+
+.result__zoom-controls > button:is(:focus-visible, :hover) {
+  scale: 0.95;
+}
+
 .result ul {
   display: flex;
   gap: 1em;
