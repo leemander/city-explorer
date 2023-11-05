@@ -89,12 +89,8 @@ function App() {
                   alt={`Map of ${location.display_name}`}
                 />
                 <div className="result__zoom-controls">
-                  <button onClick={(e) => handleZoomChange(1, e)}>
-                    Zoom In
-                  </button>
-                  <button onClick={(e) => handleZoomChange(-1, e)}>
-                    Zoom Out
-                  </button>
+                  <button onClick={() => handleZoomChange(1)}>Zoom In</button>
+                  <button onClick={() => handleZoomChange(-1)}>Zoom Out</button>
                 </div>
               </div>
               <div>{weatherData && <Weather weatherData={weatherData} />}</div>
