@@ -26,18 +26,11 @@ function App() {
     }
   }
 
-  async function getWeather(location) {
+  async function getWeather() {
     const res = await axios.get(
-      `http://localhost:8080/weather?lat=${location.lat}&lon=${location.lon}&searchTerm=${searchTerm}`
+      `http://localhost:8080/weather?searchTerm=${searchTerm}`
     );
-    const weatherArray = [];
-    res.data.data.forEach((item) => {
-      weatherArray.push({
-        date: item.datetime,
-        description: item.weather.description,
-      });
-    });
-    setWeatherData(weatherArray);
+    setWeatherData(res.data);
   }
 
   return (
