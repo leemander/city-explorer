@@ -28,7 +28,7 @@ function App() {
 
   async function getWeather(location) {
     const res = await axios.get(
-      `http://localhost:8080/weather?lat=${location.lat}&lon=${location.lon}&searhTerm=${searchTerm}`
+      `http://localhost:8080/weather?lat=${location.lat}&lon=${location.lon}&searchTerm=${searchTerm}`
     );
     const weatherArray = [];
     res.data.data.forEach((item) => {

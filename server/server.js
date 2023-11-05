@@ -8,17 +8,17 @@ app.use(cors());
 
 const weatherData = require("./data/weather.json");
 
-function filterWeather(lat, lon, searchQuery) {
+function filterWeather(lat, lon, searchTerm) {
   return weatherData.find((item) => {
     return (
-      item.lat === lat || item.lon === lon || item.city_name === searchQuery
+      item.lat === lat || item.lon === lon || item.city_name === searchTerm
     );
   });
 }
 
 app.get("/weather", (req, res) => {
-  const { lat, lon, searchQuery } = req.query;
-  res.json(filterWeather(lat, lon, searchQuery));
+  const { lat, lon, searchTerm } = req.query;
+  res.json(filterWeather(lat, lon, searchTerm));
 });
 
 app.listen(PORT, () => console.log(`App is running on port ${PORT}.`));
